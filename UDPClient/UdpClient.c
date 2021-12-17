@@ -50,9 +50,10 @@ int main(int argc, char **argv) {
     struct sockaddr_in server;
 
     int sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-    char *port = getPort(argv[1]);
+    char *port = malloc(sizeof(char)*5);
 
     if (argc > 1 && argc <= MAX_ARGC) {
+    	port = getPort(argv[1]);
         setup_server(&server, strtok(argv[1], ":"), atoi(port));
     } else {
         setup_server(&server, DEFAULT_SERVER, DEFAULT_PORT);
